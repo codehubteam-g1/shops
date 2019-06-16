@@ -8,7 +8,7 @@ let config = {
   logging: function () {}
 }
 let ProductStub = {
-  BelongsTo: sinon.spy()
+  belongsTo: sinon.spy()
 }
 let single = Object.assign({}, storeFixtures.single)
 let id = 1
@@ -58,7 +58,7 @@ test('Store', t => {
 
 test.serial('Setup', t => {
   t.true(StoreStub.hasMany.called, 'StoreModel.hasMany was executed')
-  t.true(ProductStub.BelongsTo.called, 'ProductModel.BelongsTo was executed')
+  t.true(ProductStub.belongsTo.called, 'ProductModel.BelongsTo was executed')
 })
 
 test.serial('Store # Create Or Update -exist', async t => {

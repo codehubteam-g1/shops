@@ -26,7 +26,7 @@ module.exports = async function (config) {
   const ProductModel = setupProductModel(config)
 
   StoreModel.hasMany(ProductModel)
-  ProductModel.BelongsTo(StoreModel)
+  ProductModel.belongsTo(StoreModel)
   
   await sequelize.authenticate()
   if (config.setup) {
