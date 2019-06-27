@@ -1,38 +1,32 @@
 {
-  "name": "shopsdb",
+  "name": "shops-db",
   "version": "1.0.0",
-  "description": "",
+  "private": true,
+  "description": "shops database service",
   "main": "index.js",
   "scripts": {
-    "test": "SET DEBUG=shopsdb:* && nyc --reporter=lcov ava test/store-test.js --verbose",
-    "setup": "SET DEBUG=shopsdb:* && node setup.js",
+    "setup": "DEBUG=shops:* node setup.js",
     "lint": "standard"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/codehubteam-g1/shops.git"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "Yonatan Cuervo (YOCC)",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/codehubteam-g1/shops/issues"
   },
   "homepage": "https://github.com/codehubteam-g1/shops#readme",
   "devDependencies": {
-    "ava": "^2.0.0",
-    "proxyquire": "^2.1.0",
-    "sinon": "^7.3.2",
     "standard": "^12.0.1"
   },
   "dependencies": {
-    "chalk": "^2.4.2",
     "debug": "^4.1.1",
-    "defaults": "^1.0.3",
-    "eslint": "^5.16.0",
-    "inquirer": "^6.3.1",
+    "mysql": "^2.17.1",
     "mysql2": "^1.6.5",
-    "nyc": "^14.1.1",
-    "sequelize": "^5.8.7",
-    "sqlite": "^3.0.3"
+    "mysqlw": "^0.13.6",
+    "pg-hstore": "^2.3.3",
+    "sequelize": "^5.8.7"
   }
 }
