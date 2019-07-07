@@ -7,34 +7,10 @@ npm run setup
 npm run start-dev
 npm run dev
 
-insert into orders (user_id, delivery_person_id, orderStatusId, creation_date, createdAt, updatedAt)
- values (1001, 2002, 0, "12:45:03","2019-12-12","2019-12-12");
- insert into orders (user_id, delivery_person_id, orderStatusId, creation_date, createdAt, updatedAt)
- values (1001, 2003, 0, "12:45:03","2019-12-12","2019-12-12");
+insert into stores (id, name, address, minimum_order_price, opening_hour, closing_hour, logo_url, cover_picture_url, is_active, creation_timestamp, createdAt, updatedAt )
+values (1, "subway", "calle 40 - 30", 9900, "10:00:00", "22:30:00", "www.avatar.com/ironman", "no se", 0, "12:45:03","2019-12-12","2019-12-12");
 
+insert into products (id, name, description, price, available_quantity, picture_url, is_active, creation_timestamp, createdAt, updatedAt, storeId            
+)
+values (1, "italinisimo", "oregano", 19900, 100, "sub/italiano", 1, "12:45:03","2019-12-12","2019-12-12", 1 );
 
-insert into orderProducts ( quantity, orderId, createdAt, updatedAt)
-values (4, 1,"2019-12-12","2019-12-12");
-insert into orderProducts ( quantity, orderId, createdAt, updatedAt) 
-values ( 2, 2,"2010-12-15","2010-12-15");
-insert into orderProducts ( quantity, orderId, createdAt, updatedAt) 
-values ( 5, 3,"2019-12-12","2019-12-12");
-insert into orderProducts ( quantity, orderId, createdAt, updatedAt) 
-values ( 7, 2,"2010-12-15","2010-12-15");
-
-insert into orderProducts (id, quantity, orderId, createdAt, updatedAt) 
-values (711, 4, 19,"2019-12-12","2019-12-12");
-insert into orderProducts (id, quantity, orderId, createdAt, updatedAt)
- values (798, 1, 15,"2010-12-15","2010-12-15");
-
-//stados
-insert into orderStatuses (id, name, description, createdAt, updatedAt) 
-values (0, "Sin crear", "orden no creada","2019-12-12","2019-12-12");
-insert into orderStatuses (id, name, description, createdAt, updatedAt) 
-values (1, "Acepado", "El estaurante esta preparando tu pedido","2019-12-12","2019-12-12");
-insert into orderStatuses (id, name, description, createdAt, updatedAt) 
-values (2, "En camino", "El domiciliario va hacia ti","2019-12-12","2019-12-12");
-insert into orderStatuses (id, name, description, createdAt, updatedAt) 
-values (3, "Recibido", "Recibido por el usuario","2019-12-12","2019-12-12");
-insert into orderStatuses (id, name, description, createdAt, updatedAt) 
-values (4, "Cancelado", ":(","2019-12-12","2019-12-12");

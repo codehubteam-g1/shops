@@ -9,11 +9,12 @@ module.exports = function setupProductModel (config) {
   return sequelize.define('product', {
     id: {
       type: Sequelize.INTEGER,
+      autoIncrement: true,
       allowNull: false,
       primaryKey: true
     },
     name: {
-      type: Sequelize.STRING,
+      type: Sequelize.STRING, 
       allowNull: false
     },
     description: {
