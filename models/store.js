@@ -9,6 +9,7 @@ module.exports = function setupStoreModel (config) {
   return sequelize.define('store', {
     id: {
       type: Sequelize.INTEGER,
+      autoIncrement: true,
       allowNull: false,
       primaryKey: true
     },

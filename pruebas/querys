@@ -14,3 +14,6 @@ insert into products (id, name, description, price, available_quantity, picture_
 )
 values (1, "italinisimo", "oregano", 19900, 100, "sub/italiano", 1, "12:45:03","2019-12-12","2019-12-12", 1 );
 
+
+insert into stores ( name, address, minimum_order_price, opening_hour, closing_hour, logo_url, cover_picture_url, is_active, creation_timestamp, createdAt, updatedAt )
+values ("subway", "calle 40 - 30", 9900, "10:00:00", "22:30:00", "www.avatar.com/ironman", "no se", 0, "12:45:03","2019-12-12","2019-12-12");

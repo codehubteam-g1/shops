@@ -30,7 +30,7 @@ module.exports = async function (config) {
   
   await sequelize.authenticate()
   if (config.setup) {
-    await sequelize.sync({ force: true }) // Se reemplaza la base de datos / perdida de informacion
+    await sequelize.sync({ force: false }) // Se reemplaza la base de datos / perdida de informacion
   }
 
   const Store = setupStore(StoreModel)
