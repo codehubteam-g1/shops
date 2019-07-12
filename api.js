@@ -10,60 +10,63 @@ const api = asyncify(express.Router())
 let service, Store
 
 api.use(express.json())
-api.use(express.urlencoded({extended: false}))
+api.use(express.urlencoded({ extended: false }))
 ///
 
 api.use(function (req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "Access-Control-Request-Headers, Access-Control-Request-Method, Origin, X-Requested-With, Content-Type, Accept, DNT, Referer, User-Agent, Authorization");
     res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
-  
+
     if (req.method === 'OPTIONS') {
-      res.sendStatus(200);
+        res.sendStatus(200);
     }
     else {
-      next();
+        next();
     }
-  });
-  
+});
 
-api.use('*',  async (req, res, next)=>{
+
+api.use('*', async (req, res, next) => {
     console.log("si configura")
-    if (!service){
-        try{           
+    if (!service) {
+        try {
             service = await db(config.db)
-        }catch (e){
+            res.json({
+                success: true
+            })
+        } catch (e) {
             return next(e)
         }
-    
-        Store   = service.Store
+
+        Store = service.Store
         Products = service.Product
     }
     next()
 })
 
 
-api.get('/shops', async (req, res, next)=>{
+api.get('/shops', async (req, res, next) => {
     console.log("entra")
     let sh = []
-   // console.log("entra")
-    try{
+    // console.log("entra")
+    try {
         sh = await Store.findAllStores()
-    }catch(e){
+    } catch (e) {
         return next(e)
     }
-    
-    res.send({sh })
+
+    res.send({ sh })
 })
 
-api.get('/shops/:id', async (req, res, next)=>{
-    const {id} = req.params
-    sh=[]
+api.get('/shops/:id', async (req, res, next) => {
+    const { id } = req.params
+    sh = []
     sh = await Store.findStoreByPk(id)
-    if(!sh){
+    if (!sh) {
         return next(new Error("id no found"))
     }
-    res.send({sh})
+    res.send({ sh })
 })
 /*
 api.get('/orderProduct', async (req, res)=>{

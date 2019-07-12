@@ -5,21 +5,8 @@ const setupStoreModel = require('./models/store')
 const setupProductModel = require('./models/product')
 const setupStore = require('./lib/store')
 const setupProduct = require('./lib/product')
-const defaults = require('defaults')
 
 module.exports = async function (config) {
-  config = defaults(config, {
-    dialect: 'sqlite',
-    pool: {
-      max: 10,
-      min: 0,
-      idle: 1000
-    },
-    query: {
-      raw: true
-    }
-  }
-  )
 
   const sequelize = setupDatabase(config)
   const StoreModel = setupStoreModel(config)

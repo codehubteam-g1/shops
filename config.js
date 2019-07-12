@@ -2,11 +2,11 @@
 
 module.exports = {
   db: {
-    database: process.env.DB_NAME || 'shops',
-    username: process.env.DB_USER || 'root',
-    password: process.env.DB_PASS || 'password',
-    host: process.env.DB_HOST || 'localhost',
-    dialect: 'mysql',
+    database: process.env.DB_NAME || '',
+    username: process.env.DB_USER || '',
+    password: process.env.DB_PASS || '',
+    host: process.env.DB_HOST || '',
+    dialect: 'postgres',
     //logging: s => debug(s),
     setup: true
   }
