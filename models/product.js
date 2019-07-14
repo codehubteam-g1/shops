@@ -7,12 +7,6 @@ module.exports = function setupProductModel (config) {
   const sequelize = setupDatabase(config)
 
   return sequelize.define('product', {
-    id: {
-      type: Sequelize.INTEGER,
-      autoIncrement: true,
-      allowNull: false,
-      primaryKey: true
-    },
     name: {
       type: Sequelize.STRING, 
       allowNull: false
@@ -32,17 +26,8 @@ module.exports = function setupProductModel (config) {
 
     },
     picture_url: {
-      type: Sequelize.TEXT
-
-    },
-    is_active: {
-      type: Sequelize.BOOLEAN,
-      allowNull: false,
-      defaultValue: false
-    },
-    creation_timestamp: {
-      type: Sequelize.TIME,
-      allowNull: false
+      type: Sequelize.TEXT,
+      allowNull: true
     }
   }
   )

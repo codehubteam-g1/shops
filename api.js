@@ -1,4 +1,3 @@
-const debug = require('debug')('ordenes:db:setup')
 const express = require('express')
 const asyncify = require('express-asyncify')
 const db = require('./')
@@ -68,6 +67,41 @@ api.get('/shops/:id', async (req, res, next) => {
     }
     res.send({ sh })
 })
+
+api.post('/createShop', async (req, res, next) => {
+    try{
+    let answer = await Store.createStore(req.body)
+    res.send({ success: true })
+    }
+    catch(error) {
+        return next(error)
+    }
+})
+
+api.get('/shops/:id/getProducts', async (req, res, next) => {
+    const { id } = req.params
+    sh = []
+    sh = await Store.findStoreByPk(id)
+    if (!sh) {
+        return next(new Error("id no found"))
+    }
+    let products = await sh.getProducts()
+    
+    res.send({ products })
+})
+
+api.post('/shops/:id/addProduct', async (req, res, next) => {
+    const { id } = req.params
+    sh = []
+    sh = await Store.findStoreByPk(id)
+    if (!sh) {
+        return next(new Error("id no found"))
+    }
+    await sh.addProduct(req.body)
+    
+    res.send({ seCreoProducto: true })
+})
+
 /*
 api.get('/orderProduct', async (req, res)=>{
     ord=[]

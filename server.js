@@ -1,5 +1,3 @@
-
-const debug = require('debug')('orders:api')
 const http = require('http')
 const chalk = require('chalk')
 const express = require('express')
@@ -17,8 +15,6 @@ app.use('/api', api)
 
 app.use((err, req, res, next) => {
   console.log('entró a shops')
-  debug(`Error: ${err.message}`)
-
   if (err.message.match(/not found/)) {
     return res.status(404).send({ error: err.message })
   }
