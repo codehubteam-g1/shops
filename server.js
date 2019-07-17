@@ -1,36 +1,40 @@
-const http = require('http')
-const chalk = require('chalk')
-const express = require('express')
-const asyncify = require('express-asyncify')
+'use strict'
 
-const api = require('./api')
+const Express = require('express');
+const app = Express();
+const PORT = 5001;
+const database = require('./db/database')();
+const routes = require('./routes/routes')(database)
 
-const port = process.env.PORT || 3000
-const app = asyncify(express())
-const server = http.createServer(app)
+app.use(function (req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Access-Control-Request-Headers, Access-Control-Request-Method, Origin, X-Requested-With, Content-Type, Accept, DNT, Referer, User-Agent, Authorization");
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
 
-app.use('/api', api)
+    if (req.method === 'OPTIONS') {
+        res.sendStatus(200);
+    }
+    else {
+        next();
+    }
+});
 
-//manejo de errores
+app.use(Express.json());
+app.use(Express.urlencoded({ extended: true }));
 
-app.use((err, req, res, next) => {
-  console.log('entró a shops')
-  if (err.message.match(/not found/)) {
-    return res.status(404).send({ error: err.message })
-  }
+app.use('/', routes);
 
-  res.status(500).send({ error: err.message })
-})
+//Handle errors
+app.use(function (err, req, res, next) {
+    res.status(err.status || 500);
+    if (err.error) res.json({ errorMessage: err.error.message });
+    else {
+        res.json({ errorMessage: 'Ocurrió un error en el servidor. Inténtalo de nuevo en un momento' });
+        if (err.errors && err.errors[0]) console.log(err.errors[0].message)
+        // else console.log(err)
+    }
+});
 
-function handleFatalError(err) {
-  console.error(`${chalk.red('[fatal error]')} ${err.message}`)
-  console.error(err.stack)
-  process.exit(1)
-}
-
-process.on('uncaughtException', handleFatalError)
-process.on('unhandledRejection', handleFatalError)
-
-server.listen(port, () => {
-  console.log(`${chalk.red('API')} server listening on port ${port}`)
-})
+app.listen(PORT, () => {
+    console.log(`Server started at port: ${PORT}`)
+});
