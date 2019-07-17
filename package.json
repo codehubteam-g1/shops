@@ -1,5 +1,5 @@
 {
-  "name": "shops",
+  "name": "stores",
   "version": "1.0.0",
   "description": "Shops service of the rappi-clone app",
   "main": "entrypoint.sh",
@@ -12,7 +12,7 @@
     "url": "git+https://github.com/codehubteam-g1/shops.git"
   },
   "author": "Sergio Álvarez",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/codehubteam-g1/shops/issues"
   },
@@ -21,5 +21,6 @@
     "express": "^4.17.1",
     "pg": "^7.11.0",
     "sequelize": "^5.10.1"
-  }
+  },
+  "devDependencies": {}
 }
