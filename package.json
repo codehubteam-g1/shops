@@ -1,0 +1,20 @@
+{
+  "name": "shops",
+  "version": "1.0.0",
+  "description": "Shops service of the rappi-clone app",
+  "main": "entrypoint.sh",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/codehubteam-g1/shops.git"
+  },
+  "author": "Sergio Álvarez",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/codehubteam-g1/shops/issues"
+  },
+  "homepage": "https://github.com/codehubteam-g1/shops#readme"
+}
