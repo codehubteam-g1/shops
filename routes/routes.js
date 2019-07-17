@@ -23,6 +23,31 @@ module.exports = database => {
     }
   })
 
+  router.get('/getAllStores', async (req, res, next) => {
+    try {
+      const db = await database;
+      let stores = await db.Store.findAll()
+      res.json({
+        stores
+      });
+    } catch (error) {
+      ErrorHandler(error, next)
+    }
+  })
+
+  router.get('/getStoreByStoreId/:id', async (req, res, next) => {
+    try {
+      let storeId = req.params.id
+      const db = await database;
+      let store = await db.Store.findByPk(storeId)
+      res.json({
+        store
+      });
+    } catch (error) {
+      ErrorHandler(error, next)
+    }
+  })
+
   // router.get('/getUnassignedOrders', async (req, res, next) => {
   //   try {
   //     const db = await database;
