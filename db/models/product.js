@@ -1,21 +1,18 @@
 'use strict'
 
 const Sequelize = require('sequelize')
-const setupDatabase = require('../lib/db')
 
-module.exports = config => {
-  const sequelize = setupDatabase(config)
-
-  return sequelize.define('product', {
+module.exports = sequelize => {
+  let productModel = sequelize.define('products', {
     name: {
-      type: Sequelize.STRING(50),
+      type: Sequelize.STRING,
       allowNull: false,
       validate: {
         notEmpty: true
       }
     },
     description: {
-      type: Sequelize.STRING(200),
+      type: Sequelize.STRING,
       allowNull: false,
       validate: {
         notEmpty: true
@@ -23,23 +20,26 @@ module.exports = config => {
     },
     price: {
       type: Sequelize.DECIMAL,
-      allowNull: false
+      allowNull: false,
+      validate: {
+        min: 0
+      }
     },
     availableQuantity: {
       type: Sequelize.INTEGER,
-      allowNull: false
+      allowNull: false,
+      validate: {
+        min: 0
+      }
     },
     pictureUrl: {
       type: Sequelize.TEXT,
+      allowNull: false,
       validate: {
         isUrl: true
       }
-    },
-    isActive: {
-      type: Sequelize.BOOLEAN,
-      allowNull: false,
-      defaultValue: true
     }
-  }
-  )
+  })
+
+  return productModel
 }

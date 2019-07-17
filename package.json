@@ -1,35 +1,26 @@
 {
-  "name": "shops-db",
+  "name": "stores",
   "version": "1.0.0",
-  "private": true,
-  "description": "shops database service",
-  "main": "index.js",
+  "description": "Shops service of the rappi-clone app",
+  "main": "entrypoint.sh",
   "scripts": {
-    "setup": "DEBUG=shops:* node setup.js",
-    "lint": "standard"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/codehubteam-g1/shops.git"
   },
-  "author": "Yonatan Cuervo (YOCC)",
+  "author": "Sergio Álvarez",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/codehubteam-g1/shops/issues"
   },
   "homepage": "https://github.com/codehubteam-g1/shops#readme",
-  "devDependencies": {
-    "standard": "^12.0.1"
-  },
   "dependencies": {
-    "debug": "^4.1.1",
     "express": "^4.17.1",
-    "express-asyncify": "^1.0.0",
-    "mysql": "^2.17.1",
-    "mysql2": "^1.6.5",
-    "mysqlw": "^0.13.6",
     "pg": "^7.11.0",
-    "pg-hstore": "^2.3.3",
-    "sequelize": "^5.8.7"
-  }
+    "sequelize": "^5.10.1"
+  },
+  "devDependencies": {}
 }

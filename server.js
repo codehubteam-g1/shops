@@ -1,39 +1,40 @@
+'use strict'
 
-const debug = require('debug')('orders:api')
-const http = require('http')
-const chalk = require('chalk')
-const express = require('express')
-const asyncify = require('express-asyncify')
+const Express = require('express');
+const app = Express();
+const PORT = 4001;
+const database = require('./db/database')();
+const routes = require('./routes/routes')(database)
 
-const api = require('./api')
+app.use(function (req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Access-Control-Request-Headers, Access-Control-Request-Method, Origin, X-Requested-With, Content-Type, Accept, DNT, Referer, User-Agent, Authorization");
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
 
-const port = process.env.PORT || 3000
-const app = asyncify(express())
-const server = http.createServer(app)
-
-app.use('/api', api)
-
-//manejo de errores
-
-app.use((err, req, res, next) => {
-    debug(`Error: ${err.message}`)
-  
-    if (err.message.match(/not found/)) {
-      return res.status(404).send({ error: err.message })
+    if (req.method === 'OPTIONS') {
+        res.sendStatus(200);
     }
-  
-    res.status(500).send({ error: err.message })
-  })
+    else {
+        next();
+    }
+});
 
-  function handleFatalError (err) {
-    console.error(`${chalk.red('[fatal error]')} ${err.message}`)
-    console.error(err.stack)
-    process.exit(1)
-  }
+app.use(Express.json());
+app.use(Express.urlencoded({ extended: true }));
 
-  process.on('uncaughtException', handleFatalError)
-process.on('unhandledRejection', handleFatalError)
+app.use('/', routes);
 
-server.listen(port,() => {
-    console.log(`${chalk.red('API')} server listening on port ${port}`)
-})
+//Handle errors
+app.use(function (err, req, res, next) {
+    res.status(err.status || 500);
+    if (err.error) res.json({ errorMessage: err.error.message });
+    else {
+        res.json({ errorMessage: 'Ocurrió un error en el servidor. Inténtalo de nuevo en un momento' });
+        if (err.errors && err.errors[0]) console.log(err.errors[0].message)
+        // else console.log(err)
+    }
+});
+
+app.listen(PORT, () => {
+    console.log(`Server started at port: ${PORT}`)
+});
