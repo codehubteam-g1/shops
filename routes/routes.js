@@ -48,6 +48,28 @@ module.exports = database => {
     }
   })
 
+  router.post('/createProductInStore/:id', async (req, res, next) => {
+    try {
+      if (req.headers.usertype != 'administrator') {
+        throw ({ error: new Error('Debes estar logeado como administrador para poder crear un producto'), status: 401 })
+      }
+      let storeId = req.params.id
+
+      const db = await database;
+      let store = await db.Store.create(req.body)
+
+      if(store === null) next({ error: new Error("La tienda en la que quieres crear el producto no existe"), status: 401 })
+
+      await store.createProduct(req.body)
+
+      res.json({
+        success: true
+      });
+    } catch (error) {
+      ErrorHandler(error, next)
+    }
+  })
+
   router.get('/getProductByProductId/:id', async (req, res, next) => {
     try {
       let productId = req.params.id
