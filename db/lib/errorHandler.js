@@ -11,7 +11,8 @@ module.exports = (error, next) => {
             else if (error.errors[0].message === 'Validation isUrl on coverPictureUrl failed') next({ error: new Error('La url del cover es inválida'), status: 401 })
             else if (error.errors[0].message === 'stores.address cannot be null') next({ error: new Error('La dirección de la tienda no puede estar vacía'), status: 401 })
             else if (error.errors[0].message === 'stores.minimumOrderPrice cannot be null') next({ error: new Error('Debes ingresar el precio mínimo de la orden'), status: 401 })
-
+            else if (error.errors[0].message === 'stores.openingHour cannot be null') next({ error: new Error('Debes ingresar la hora de apertura'), status: 401 })
+            
             // Errors related to the products model
             else if (error.errors[0].message === 'products.name cannot be null') next({ error: new Error('El nombre del producto no puede estar vacío'), status: 401 })
             else if (error.errors[0].message === 'products.description cannot be null') next({ error: new Error('La descripción del producto no puede estar vacía'), status: 401 })
