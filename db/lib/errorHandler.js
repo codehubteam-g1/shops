@@ -14,6 +14,7 @@ module.exports = (error, next) => {
             else if (error.errors[0].message === 'stores.openingHour cannot be null') next({ error: new Error('Debes ingresar la hora de apertura'), status: 401 })
             else if (error.errors[0].message === 'stores.closingHour cannot be null') next({ error: new Error('Debes ingresar la hora de cierre'), status: 401 })
             else if (error.errors[0].message === 'stores.logoUrl cannot be null') next({ error: new Error('Debes ingresar la url del logo'), status: 401 })
+            else if (error.errors[0].message === 'stores.coverPictureUrl cannot be null') next({ error: new Error('Debes ingresar la url de la imagen de cover'), status: 401 })
             
             // Errors related to the products model
             else if (error.errors[0].message === 'products.name cannot be null') next({ error: new Error('El nombre del producto no puede estar vacío'), status: 401 })
