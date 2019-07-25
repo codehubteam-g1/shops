@@ -21,6 +21,7 @@ module.exports = (error, next) => {
             else if (error.errors[0].message === 'products.name cannot be null') next({ error: new Error('El nombre del producto no puede estar vacío'), status: 401 })
             else if (error.errors[0].message === 'products.description cannot be null') next({ error: new Error('La descripción del producto no puede estar vacía'), status: 401 })
             else if (error.errors[0].message === 'products.price cannot be null') next({ error: new Error('El precio del producto no puede estar vacío'), status: 401 })
+            else if (error.errors[0].message === 'products.availableQuantity cannot be null') next({ error: new Error('La cantidad de unidades disponibles del producto no puede estar vacío'), status: 401 })
             else if (error.errors[0].message === 'Validation isUrl on pictureUrl failed') next({ error: new Error('La url de la foto del producto es inválida'), status: 401 })
 
             // Errors related to both
