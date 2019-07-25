@@ -39,6 +39,7 @@ module.exports = (error, next) => {
     }
     else{
         console.log('Tercer else')
-        next({ error: new Error(error.message), status: 500 })
+        if (error.message.includes('invalid input syntax for type numeric:')) next({ error: new Error('Debes ingresar un precio válido'), status: 401 })
+        else next({ error: new Error(error.message), status: 500 })
     }
 }
