@@ -48,6 +48,20 @@ module.exports = database => {
     }
   })
 
+  router.get('/getProductByProductId/:id', async (req, res, next) => {
+    try {
+      let productId = req.params.id
+      const db = await database
+      let product = await db.Product.findByPk(productId)
+      res.json({
+        product
+      });
+    } catch (error) {
+      ErrorHandler(error, next)
+    }
+  })
+
+
   // router.get('/getUnassignedOrders', async (req, res, next) => {
   //   try {
   //     const db = await database;
