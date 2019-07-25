@@ -9,6 +9,7 @@ module.exports = (error, next) => {
             else if (error.errors[0].message === 'name must be unique') next({ error: new Error('Ya hay una tienda con este mismo nombre'), status: 401 })
             else if (error.errors[0].message === 'Validation isUrl on logoUrl failed') next({ error: new Error('La url del logo es inválida'), status: 401 })
             else if (error.errors[0].message === 'Validation isUrl on coverPictureUrl failed') next({ error: new Error('La url del cover es inválida'), status: 401 })
+            else if (error.errors[0].message === 'stores.address cannot be null') next({ error: new Error('La dirección de la tienda no puede estar vacía'), status: 401 })
 
             // Errors related to the products model
             else if (error.errors[0].message === 'products.name cannot be null') next({ error: new Error('El nombre del producto no puede estar vacío'), status: 401 })
