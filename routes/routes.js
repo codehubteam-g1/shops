@@ -56,7 +56,7 @@ module.exports = database => {
       let storeId = req.params.id
 
       const db = await database;
-      let store = await db.Store.create(req.body)
+      let store = await db.Store.findByPk(storeId)
 
       if(store === null) next({ error: new Error("La tienda en la que quieres crear el producto no existe"), status: 401 })
 
