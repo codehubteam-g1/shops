@@ -102,6 +102,24 @@ module.exports = database => {
     }
   })
 
+  router.post('/deleteProduct/:id', async (req, res, next) => {
+    try {
+      let productId = req.params.id
+      const db = await database
+      let product = await db.Product.findByPk(productId)
+
+      if(product === null) next({ error: new Error("El producto que buscas no existe"), status: 401 })
+
+      await product.destroy()
+
+      res.json({
+        success: true
+      });
+    } catch (error) {
+      ErrorHandler(error, next)
+    }
+  })
+
 
   // router.get('/getUnassignedOrders', async (req, res, next) => {
   //   try {
