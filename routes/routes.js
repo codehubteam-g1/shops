@@ -120,5 +120,27 @@ module.exports = database => {
     }
   })
   
+  router.post('/buyProduct/:id', async (req, res, next) => {
+    try {
+      let productId = req.params.id
+      const db = await database
+      let product = await db.Product.findByPk(productId)
+      if(product === null) next({ error: new Error("El producto que buscas no existe"), status: 401 })
+
+      let currentQuantity = product.availableQuantity
+      let availableQuantity = currentQuantity-req.body.quantity
+      
+      if(req.body.quantity > currentQuantity) next({ error: new Error("No puedes comprar una cantidad mayor a la disponible"), status: 401 })
+
+      await product.update({availableQuantity})
+
+      res.json({
+        success: true
+      });
+    } catch (error) {
+      ErrorHandler(error, next)
+    }
+  })
+
   return router;
 }
