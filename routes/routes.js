@@ -70,6 +70,25 @@ module.exports = database => {
     }
   })
 
+  router.get('/getStoreProducts/:id', async (req, res, next) => {
+    try {
+      let storeId = req.params.id
+
+      const db = await database
+      let store = await db.Store.findByPk(storeId)
+
+      if(store === null) next({ error: new Error("La tienda que buscas no existe"), status: 401 })
+
+      let products = await store.getProducts()
+      
+      res.json({
+        products
+      });
+    } catch (error) {
+      ErrorHandler(error, next)
+    }
+  })
+
   router.get('/getProductByProductId/:id', async (req, res, next) => {
     try {
       let productId = req.params.id
