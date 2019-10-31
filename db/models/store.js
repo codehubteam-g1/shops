@@ -44,17 +44,11 @@ module.exports = sequelize => {
     },
     logoUrl: {
       type: Sequelize.TEXT,
-      allowNull: false,
-      validate: {
-        isUrl: true
-      }
+      allowNull: false
     },
     coverPictureUrl: {
       type: Sequelize.TEXT,
-      allowNull: false,
-      validate: {
-        isUrl: true
-      }
+      allowNull: false
     }
   })
 

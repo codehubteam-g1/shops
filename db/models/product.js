@@ -34,10 +34,7 @@ module.exports = sequelize => {
     },
     pictureUrl: {
       type: Sequelize.TEXT,
-      allowNull: false,
-      validate: {
-        isUrl: true
-      }
+      allowNull: false
     }
   })
 
